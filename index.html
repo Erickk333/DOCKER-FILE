@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Zona Gamer Interactiva</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+        }
+
+        header {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #1c1c1c;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        nav button:hover {
+            background: #00c6ff;
+        }
+
+        section {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .card {
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            margin: 15px auto;
+            border-radius: 10px;
+            width: 60%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .resultado {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #111;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    🎮 Zona Gamer Interactiva
+</header>
+
+<nav>
+    <button onclick="mostrarSeccion('inicio')">Inicio</button>
+    <button onclick="mostrarSeccion('generos')">Géneros</button>
+    <button onclick="mostrarSeccion('quiz')">Quiz Gamer</button>
+    <button onclick="mostrarSeccion('minijuego')">Mini Juego</button>
+</nav>
+
+<!-- SECCIÓN INICIO -->
+<section id="inicio" class="active">
+    <h2>Bienvenido Gamer</h2>
+    <div class="card">
+        <p>Explora el mundo de los videojuegos, prueba tus conocimientos y juega un mini juego interactivo.</p>
+    </div>
+</section>
+
+<!-- SECCIÓN GENEROS -->
+<section id="generos">
+    <h2>🎯 Géneros de Videojuegos</h2>
+    <div class="card">
+        <p><strong>Acción:</strong> Juegos rápidos con combate intenso.</p>
+        <p><strong>RPG:</strong> Juegos de rol con progresión de personaje.</p>
+        <p><strong>Deportes:</strong> Simulaciones deportivas.</p>
+        <p><strong>Battle Royale:</strong> Supervivencia multijugador.</p>
+    </div>
+</section>
+
+<!-- SECCIÓN QUIZ -->
+<section id="quiz">
+    <h2>🧠 Quiz Gamer</h2>
+    <div class="card">
+        <p>¿Qué significa RPG?</p>
+        <button onclick="verificarQuiz('a')">Juego de disparos</button>
+        <button onclick="verificarQuiz('b')">Role Playing Game</button>
+        <button onclick="verificarQuiz('c')">Juego de carreras</button>
+        <div class="resultado" id="resultadoQuiz"></div>
+    </div>
+</section>
+
+<!-- SECCIÓN MINI JUEGO -->
+<section id="minijuego">
+    <h2>🎲 Adivina el Número</h2>
+    <div class="card">
+        <p>Adivina un número entre 1 y 10</p>
+        <input type="number" id="numeroUsuario" min="1" max="10">
+        <button onclick="jugar()">Intentar</button>
+        <div class="resultado" id="resultadoJuego"></div>
+    </div>
+</section>
+
+<footer>
+telematica 2 
+</footer>
+
+<script>
+    function mostrarSeccion(id) {
+        let secciones = document.querySelectorAll("section");
+        secciones.forEach(sec => sec.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+    }
+
+    function verificarQuiz(respuesta) {
+        let resultado = document.getElementById("resultadoQuiz");
+        if (respuesta === 'b') {
+            resultado.innerHTML = "✅ ¡Correcto!";
+            resultado.style.color = "lightgreen";
+        } else {
+            resultado.innerHTML = "❌ Incorrecto, intenta de nuevo.";
+            resultado.style.color = "red";
+        }
+    }
+
+    function jugar() {
+        let numeroSecreto = Math.floor(Math.random() * 10) + 1;
+        let numeroUsuario = document.getElementById("numeroUsuario").value;
+        let resultado = document.getElementById("resultadoJuego");
+
+        if (numeroUsuario == numeroSecreto) {
+            resultado.innerHTML = "🎉 ¡Ganaste! El número era " + numeroSecreto;
+            resultado.style.color = "lightgreen";
+        } else {
+            resultado.innerHTML = "😢 Perdiste. El número era " + numeroSecreto;
+            resultado.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
